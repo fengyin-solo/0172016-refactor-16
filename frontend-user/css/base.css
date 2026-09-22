@@ -2,6 +2,7 @@
    基础样式 - 重置与通用
    ======================================== */
 
+/* ---------- 重置 ---------- */
 * {
     margin: 0;
     padding: 0;
@@ -23,19 +24,27 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* 背景动画 */
-.bg-animation {
+/* ========================================
+   背景效果层 - 共用全屏固定层
+   ======================================== */
+.bg-animation,
+.grid-overlay,
+.particles {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
-    background: 
-        radial-gradient(ellipse at 20% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 10% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+}
+
+/* 背景动画 */
+.bg-animation {
+    z-index: var(--z-background);
+    background:
+        radial-gradient(ellipse at 20% 20%, var(--glow-purple) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, var(--glow-pink) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, var(--glow-cyan) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, var(--glow-green) 0%, transparent 40%);
     animation: bgPulse 10s ease-in-out infinite;
 }
 
@@ -46,38 +55,28 @@ body {
 
 /* 网格覆盖层 */
 .grid-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-image: 
-        linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+    z-index: var(--z-overlay);
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
 }
 
 /* 粒子效果层 */
 .particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    z-index: var(--z-overlay);
     pointer-events: none;
     overflow: hidden;
 }
 
 .particle {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: var(--particle-size);
+    height: var(--particle-size);
     background: var(--neon-purple);
-    border-radius: 50%;
+    border-radius: var(--radius-full);
     opacity: 0.3;
     animation: float 15s infinite ease-in-out;
 }
@@ -89,15 +88,19 @@ body {
     100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
 }
 
-/* 容器 */
+/* ========================================
+   布局容器
+   ======================================== */
 .container {
-    max-width: 1600px;
+    max-width: var(--container-max);
     margin: 0 auto;
     padding: var(--spacing-lg);
     position: relative;
 }
 
-/* 玻璃卡片 */
+/* ========================================
+   玻璃卡片 - 共用卡片写法
+   ======================================== */
 .glass-card {
     background: var(--bg-card);
     backdrop-filter: blur(20px);
@@ -114,30 +117,36 @@ body {
     transform: translateY(-2px);
 }
 
-/* 滚动条 */
+/* ========================================
+   滚动条
+   ======================================== */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--scrollbar-track);
     border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink));
+    background: var(--gradient-scrollbar);
     border-radius: var(--radius-sm);
     transition: background var(--transition-fast);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--neon-purple-light), var(--neon-pink-light));
+    background: var(--gradient-scrollbar-hover);
 }
+
+/* ========================================
+   通用元素
+   ======================================== */
 
 /* 选中文本 */
 ::selection {
-    background: rgba(168, 85, 247, 0.4);
+    background: var(--selection-bg);
     color: white;
 }
 
@@ -152,74 +161,9 @@ a:hover {
     color: var(--neon-cyan-light);
 }
 
-/* 按钮基础 */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: none;
-    border-radius: var(--radius-md);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.btn:hover::before {
-    left: 100%;
-}
-
-.btn-primary {
-    background: var(--gradient-purple-pink);
-    color: white;
-    box-shadow: var(--shadow-sm);
-}
-
-.btn-primary:hover {
-    box-shadow: var(--shadow-glow-purple);
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
-    border: 1px solid var(--glass-border);
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--glass-border-hover);
-}
-
-/* 加载动画 */
-.loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(168, 85, 247, 0.2);
-    border-top-color: var(--neon-purple);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+/* ========================================
+   动画工具类
+   ======================================== */
 
 /* 淡入动画 */
 .fade-in {
