@@ -4,8 +4,8 @@
 
 .toast-container {
     position: fixed;
-    top: 24px;
-    right: 24px;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
     z-index: 10000;
     display: flex;
     flex-direction: column;
@@ -18,14 +18,14 @@
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    padding: 16px 20px;
-    background: rgba(20, 20, 35, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: var(--spacing-md) 20px;
+    background: var(--surface-toast);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border-radius: var(--radius-lg);
-    box-shadow: 
+    box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 0 0 1px var(--glass-highlight),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     pointer-events: auto;
     transform: translateX(120%);
@@ -162,11 +162,9 @@
 .toast-close {
     width: 24px;
     height: 24px;
-    border: none;
     background: rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -221,8 +219,8 @@
         left: 12px;
         max-width: none;
     }
-    
+
     .toast {
-        padding: 14px 16px;
+        padding: 14px var(--spacing-md);
     }
 }

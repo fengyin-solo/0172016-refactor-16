@@ -73,4 +73,41 @@
     /* 字体 */
     --font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+    /* 玻璃拟态（卡片 / 浮层共用） */
+    --glass-blur: 20px;
+    --glass-highlight: rgba(255, 255, 255, 0.08);
+    --shadow-card: var(--shadow-md), inset 0 1px 0 var(--glass-highlight);
+    --shadow-card-hover: var(--shadow-lg), var(--shadow-glow-purple);
+
+    /* 浮层表面 */
+    --surface-toast: rgba(20, 20, 35, 0.95);
+    --surface-sidebar: rgba(10, 10, 18, 0.92);
+    --surface-sidebar-blur: 30px;
+    --surface-gap-card: rgba(20, 20, 35, 0.5);
+    --surface-gap-card-hover: rgba(30, 30, 50, 0.7);
+
+    /* 背景动画层 */
+    --bg-glow-purple: rgba(168, 85, 247, 0.15);
+    --bg-glow-pink: rgba(236, 72, 153, 0.12);
+    --bg-glow-cyan: rgba(6, 182, 212, 0.08);
+    --bg-glow-green: rgba(16, 185, 129, 0.08);
+    --bg-grid-line: rgba(168, 85, 247, 0.03);
+    --grid-size: 60px;
+
+    /* 粒子层 */
+    --particle-size: 4px;
+    --particle-opacity: 0.3;
+
+    /* 动画时长 / 位移 */
+    --duration-bg-pulse: 10s;
+    --duration-particle: 15s;
+    --duration-fade-in: 0.6s;
+    --fade-in-distance: 20px;
+
+    /* 滚动条 */
+    --scrollbar-size: var(--spacing-sm);
+    --scrollbar-track: rgba(0, 0, 0, 0.3);
+    --scrollbar-thumb: linear-gradient(180deg, var(--neon-purple), var(--neon-pink));
+    --scrollbar-thumb-hover: linear-gradient(180deg, var(--neon-purple-light), var(--neon-pink-light));
 }
